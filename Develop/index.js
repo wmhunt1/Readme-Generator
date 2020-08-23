@@ -3,19 +3,22 @@ var inquirer = require('inquirer');
 let inputs = [];
 
 // function to write README file
-// function writeToFile() {
+function writeToFile() {
     
-//     fs.writeFile("log.txt", inputs, function(err) {
+    fs.writeFile("log.txt", JSON.stringify(inputs), function(err) {
 
-//         if (err) {
-//           console.log(err);
-//         }
-//         else {
-//           console.log("Commit logged!");
-//         }
+        if (err) {
+          console.log(err);
+        }
+        else {
+          console.log("Commit logged!");
+        }
       
-//       });
-// }
+      });
+// file.on('error', function(err) { /* error handling */ });
+// inputs.forEach(function(v) { file.write(v.join(', ') + '\n'); });
+// file.end();
+}
 
 // function to initialize program
 function init() {
@@ -72,6 +75,10 @@ inquirer
             // Something else when wrong
         }
     });
+    writeToFile()
 }
 // function call to initialize program
 init();
+
+
+
