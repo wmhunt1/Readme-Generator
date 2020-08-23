@@ -1,21 +1,26 @@
 var fs = require("fs");
 var inquirer = require('inquirer');
-// array of questions for user
-// const questions = [
+let inputs = [];
 
-// ];
+// function to write README file
+function writeToFile() {
+    for (var i = 0; i < inputs.length; i++)
+    {
+    fs.appendFile("log.txt", inputs[i] + '\n', function(err) {
 
-// // function to write README file
-// function writeToFile(fileName, data) {
-// }
+        if (err) {
+          console.log(err);
+        }
+        else {
+          console.log("Commit logged!");
+        }
+      
+      });
+    }
+}
 
-// // function to initialize program
-// function init() {
-
-// }
-
-// // function call to initialize program
-// init();
+// function to initialize program
+function init() {
 inquirer
     .prompt([
         /* Pass your questions in here */
@@ -50,7 +55,10 @@ inquirer
         console.info('Description:', answers.description);
         console.info('Installation:', answers.install);
         console.info('Usage:', answers.usage);
+        console.info('Credits:', answers.credits);
         // Use user feedback for... whatever!!
+        inputs.push(answers)
+        console.info(inputs)
     })
     .catch(error => {
         if (error.isTtyError) {
@@ -59,3 +67,7 @@ inquirer
             // Something else when wrong
         }
     });
+    writeToFile()
+}
+// function call to initialize program
+init();
