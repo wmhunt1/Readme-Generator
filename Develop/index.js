@@ -3,21 +3,19 @@ var inquirer = require('inquirer');
 let inputs = [];
 
 // function to write README file
-function writeToFile() {
-    for (var i = 0; i < inputs.length; i++)
-    {
-    fs.appendFile("log.txt", inputs[i] + '\n', function(err) {
+// function writeToFile() {
+    
+//     fs.writeFile("log.txt", inputs, function(err) {
 
-        if (err) {
-          console.log(err);
-        }
-        else {
-          console.log("Commit logged!");
-        }
+//         if (err) {
+//           console.log(err);
+//         }
+//         else {
+//           console.log("Commit logged!");
+//         }
       
-      });
-    }
-}
+//       });
+// }
 
 // function to initialize program
 function init() {
@@ -42,12 +40,17 @@ inquirer
         {
             name: 'usage',
             message: 'Provide instructions to use your project.',
-            default: "Just type Node index into the terminal"
+            default: "Just type node index into the terminal"
         },
         {
             name: 'credits',
             message: 'List the collaborators and tutorials used.',
             default: "None"
+        },
+        {
+            name: 'license',
+            message: 'What can users do or not do with your project?',
+            default: "Anything"
         },
     ])
     .then(answers => {
@@ -56,8 +59,10 @@ inquirer
         console.info('Installation:', answers.install);
         console.info('Usage:', answers.usage);
         console.info('Credits:', answers.credits);
+        console.info('License:', answers.license);
         //adds answers to input array
         inputs.push(answers)
+        //reads inputs
         console.info(inputs)
     })
     .catch(error => {
@@ -67,8 +72,6 @@ inquirer
             // Something else when wrong
         }
     });
-    //writeToFile()
 }
 // function call to initialize program
 init();
-writeToFile();
