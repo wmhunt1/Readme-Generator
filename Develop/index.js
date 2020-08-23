@@ -56,7 +56,7 @@ inquirer
         console.info('Installation:', answers.install);
         console.info('Usage:', answers.usage);
         console.info('Credits:', answers.credits);
-        // Use user feedback for... whatever!!
+        //adds answers to input array
         inputs.push(answers)
         console.info(inputs)
     })
@@ -67,7 +67,8 @@ inquirer
             // Something else when wrong
         }
     });
-    writeToFile()
+    //writeToFile()
 }
 // function call to initialize program
 init();
+writeToFile();
