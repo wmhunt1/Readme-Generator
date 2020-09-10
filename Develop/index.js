@@ -1,19 +1,12 @@
 var fs = require("fs");
 var inquirer = require('inquirer');
-let inputs = [];
 
 // function to write README file
-function writeToFile() {
+function writeToFile(data) {
     
-    fs.appendFile("testREADME.md", JSON.stringify(inputs), function(err) {
+    fs.writeFile("testREADME.md", data, function(err) {
 
-        if (err) {
-          console.log(err);
-        }
-        else {
-          //nothing
-        }
-      
+        if (err) throw err
       });
 }
 
@@ -75,20 +68,8 @@ inquirer
        
     ])
     .then(answers => {
-        console.info('Project Title:', answers.title);
-        console.info('Description:', answers.description);
-        console.info('Installation:', answers.install);
-        console.info('Usage:', answers.usage);
-        console.info('Credits:', answers.credits);
-        console.info('License:', answers.license);
-        console.info('License:', answers.badge);
-        console.info('License:', answers.contributing);
-        console.info('License:', answers.tests);
-        console.info('License:', answers.questions);
-        //adds answers to input array
-        inputs.push(answers)
-        //reads inputs
-        console.info(inputs)
+        let markdown = 'Project Title: ' + answers.title + '\n' + 'Description: ' + answers.description + '\n' + 'Installation: ' +  answers.install + '\n' + 'Usage: ' + answers.usage + '\n' + 'Credits: ' +  answers.credits +  '\n' + 'License: ' + answers.license + '\n' + 'Badge: ' + answers.badge + '\n' + 'Contributing: ' + answers.contributing + '\n' + 'Test: ' + answers.tests + '\n' + 'Questions: ' + answers.questions;
+        writeToFile(markdown)
     })
     .catch(error => {
         if (error.isTtyError) {
@@ -101,7 +82,6 @@ inquirer
 }
 // function call to initialize program
 init();
-writeToFile()
 
 
 
